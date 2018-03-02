@@ -43,7 +43,7 @@ export const NG_SELECT_DEFAULT_CONFIG = new InjectionToken<NgSelectConfig>('ng-s
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 
 @Component({
-    selector: 'ng-select',
+    selector: 'bd-select',
     templateUrl: './ng-select.component.html',
     styleUrls: ['./ng-select.component.scss'],
     providers: [{
@@ -55,14 +55,19 @@ export type DropdownPosition = 'bottom' | 'top' | 'auto';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         'role': 'dropdown',
-        'class': 'ng-select',
+        'class': 'bd-select',
         '[class.top]': 'currentDropdownPosition === "top"',
         '[class.bottom]': 'currentDropdownPosition === "bottom"',
-        '[class.ng-single]': '!multiple',
-        '[class.ng-selected]': 'hasValue'
+        '[class.bd-single]': '!multiple',
+        '[class.bd-selected]': 'hasValue'
     }
 })
 export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, ControlValueAccessor {
+
+    // BD-Properties
+    @Input() label: string;
+    @Input() disableErrors = false;
+    @Input() propertyErrorPath: string = null;
 
     // inputs
     @Input() items: any[] = [];
